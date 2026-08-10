@@ -13,7 +13,7 @@ from zoneinfo import ZoneInfo
 import pytest
 from freezegun import freeze_time
 
-from migrations.runner import run_001, run_002
+from migrations.runner import run_all
 from push_runner import run_tick
 from repositories.servings import get_or_create_serving, get_serving, set_pushed_at
 from repositories.users import get_or_create_user, update_settings
@@ -25,8 +25,7 @@ from repositories.users import get_or_create_user, update_settings
 def db_path(tmp_path: Path) -> Path:
     """Migration 001 + 002 適用済み DB パス。"""
     path = tmp_path / "test_push.db"
-    run_001(path)
-    run_002(path)
+    run_all(path)
     return path
 
 

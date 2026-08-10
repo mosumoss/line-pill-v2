@@ -12,7 +12,7 @@ from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 
-from migrations.runner import run_001, run_002
+from migrations.runner import run_all
 from repositories.medications import add_user_medication, list_preset_medications
 from repositories.servings import get_or_create_serving
 from repositories.users import User, get_or_create_user
@@ -24,8 +24,7 @@ from repositories.users import User, get_or_create_user
 def db_path(tmp_path: Path) -> Path:
     """Migration 001+002 適用済み DB パス。"""
     path = tmp_path / "test_api.db"
-    run_001(path)
-    run_002(path)
+    run_all(path)
     return path
 
 

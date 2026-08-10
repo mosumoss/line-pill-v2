@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pytest
 
-from migrations.runner import run_001
+from migrations.runner import run_all
 from repositories.users import (
     User,
     UserSettings,
@@ -23,7 +23,7 @@ from repositories.users import (
 @pytest.fixture
 def db(empty_db: Path) -> sqlite3.Connection:
     """Migration 001 適用済み DB への接続。テスト後は自動 close。"""
-    run_001(empty_db)
+    run_all(empty_db)
     conn = sqlite3.connect(empty_db)
     conn.execute("PRAGMA foreign_keys = ON")
     yield conn
